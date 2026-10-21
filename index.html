@@ -3,839 +3,915 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vakaa Stores | Chic Dresses & Footwear</title>
-    <!-- Tailwind CSS -->
+    <title>Jean Stores - Fashion for Ages 12-15</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
                     colors: {
                         brand: {
-                            50: '#fdf2f8',
-                            100: '#fce7f3',
-                            200: '#fbcfe8',
-                            300: '#f472b6',
-                            400: '#e879f9',
-                            500: '#ec4899',
-                            600: '#db2777',
-                            700: '#be185d',
-                            800: '#9d174d',
-                            900: '#831843',
+                            pink: '#F472B6',
+                            rose: '#F43F5E',
+                            lightpink: '#FDF2F8',
+                            gold: '#D97706',
+                            dark: '#1F2937'
                         }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Custom scrollbars */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #fdf2f8;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #f472b6;
-            border-radius: 9999px;
-        }
-        
-        .product-card:hover .product-img {
-            transform: scale(1.05);
-        }
-
-        .toast-slide-in {
-            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #FDF2F8; }
+        .serif-title { font-family: 'Playfair Display', serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #f472b6; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-brand-200 selection:text-brand-900">
+<body class="text-gray-800 min-h-screen flex flex-col">
 
-    <!-- ANNOUNCEMENT BAR -->
-    <div class="bg-gradient-to-r from-brand-600 via-brand-500 to-pink-500 text-white text-xs py-2 px-4 text-center font-medium tracking-wide shadow-sm flex items-center justify-center gap-2">
-        <span>✨ Free Shipping on Orders Over $75 | New Arrivals Collection</span>
-    </div>
-
-    <!-- HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-pink-100 shadow-sm transition-all duration-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20 gap-4">
-                
-                <!-- Logo -->
-                <a href="#" class="flex items-center gap-2 group">
-                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-brand-500 to-pink-400 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
-                        <span class="font-serif font-bold text-xl">V</span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-serif text-2xl font-bold tracking-tight text-slate-900 group-hover:text-brand-600 transition-colors">Vakaa<span class="text-brand-500">.</span></span>
-                        <span class="text-[10px] tracking-widest uppercase font-semibold text-slate-400 -mt-1">Stores & Boutique</span>
-                    </div>
-                </a>
-
-                <!-- Admin Status Badge (Visible when Admin Mode ON) -->
-                <div id="adminModeBanner" class="hidden flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-bold animate-pulse">
-                    <i class="fa-solid fa-user-gear"></i>
-                    <span>Admin Mode Active (Editing Enabled)</span>
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md shadow-sm border-b border-pink-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-tr from-pink-400 to-rose-400 text-white p-2.5 rounded-2xl shadow-md">
+                    <i class="fa-solid font-bold text-xl fa-gem"></i>
                 </div>
-
-                <!-- Search Bar -->
-                <div class="flex-1 max-w-md hidden md:block">
-                    <div class="relative">
-                        <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search dresses, heels, sneakers, boots..." 
-                            class="w-full pl-10 pr-4 py-2.5 rounded-full border border-pink-200 bg-pink-50/30 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all placeholder-slate-400">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-pink-400 text-sm"></i>
-                    </div>
-                </div>
-
-                <!-- Cart Button -->
-                <div class="flex items-center gap-3">
-                    <button onclick="toggleCart(true)" class="flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-brand-500 text-white font-medium hover:bg-brand-600 shadow-md shadow-brand-500/25 active:scale-95 transition-all relative">
-                        <i class="fa-solid fa-bag-shopping text-lg"></i>
-                        <span class="hidden sm:inline text-sm font-semibold">Bag</span>
-                        <span id="cartCountBadge" class="bg-white text-brand-700 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-inner">0</span>
-                    </button>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight text-gray-900 serif-title">Jean Stores</h1>
+                    <p class="text-xs text-pink-500 font-medium">Boutique for Ages 12–15</p>
                 </div>
             </div>
 
-            <!-- Mobile Search Bar -->
-            <div class="pb-3 md:hidden">
-                <div class="relative">
-                    <input type="text" id="mobileSearchInput" oninput="handleSearch(true)" placeholder="Search catalog..." 
-                        class="w-full pl-10 pr-4 py-2 rounded-full border border-pink-200 bg-pink-50/40 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-pink-400 text-sm"></i>
+            <!-- Header Action Buttons -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <!-- Admin Mode Indicator -->
+                <div id="adminBadge" class="hidden items-center bg-amber-100 border border-amber-300 text-amber-800 text-xs px-2.5 py-1 rounded-full font-medium">
+                    <span class="w-2 h-2 rounded-full bg-amber-500 mr-1.5 animate-pulse"></span>
+                    Admin Active
                 </div>
+
+                <button onclick="handleAdminButtonClick()" class="flex items-center space-x-1.5 text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-xl transition font-medium">
+                    <i class="fa-solid fa-lock text-pink-500"></i>
+                    <span id="adminBtnText" class="hidden sm:inline">Admin Access</span>
+                </button>
+
+                <button onclick="toggleCartDrawer()" class="relative bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white p-2.5 sm:px-4 sm:py-2 rounded-xl shadow-md transition flex items-center space-x-2">
+                    <i class="fa-solid fa-bag-shopping text-lg"></i>
+                    <span class="hidden sm:inline font-medium text-sm">Bag</span>
+                    <span id="cartCount" class="bg-white text-pink-600 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- HERO BANNER -->
-    <section class="relative overflow-hidden bg-gradient-to-br from-pink-100 via-purple-50 to-pink-50 py-12 md:py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center lg:text-left">
-            <div class="max-w-2xl">
-                <span class="inline-block px-3.5 py-1 rounded-full bg-white/80 border border-pink-200 text-brand-700 text-xs font-bold uppercase tracking-wider shadow-xs mb-3">
-                    ✨ Premium Boutique Collection
-                </span>
-                <h1 class="font-serif text-3xl sm:text-5xl font-bold text-slate-900 leading-tight">
-                    Chic Dresses, Boots & <span class="text-brand-600 italic">Statement Shoes</span>
-                </h1>
-                <p class="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-                    Discover our handpicked selection of party gowns, sparkly heels, cozy winter boots, and streetwear sneakers crafted for elegance and everyday fashion.
-                </p>
+    <!-- Admin Top Status Bar -->
+    <div id="adminTopBar" class="hidden bg-gradient-to-r from-amber-500 to-amber-600 text-white px-4 py-2.5 shadow-inner">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-user-shield text-lg"></i>
+                <span><strong>Admin Mode Active:</strong> You can edit products, manage pricing, and view customer payment proofs.</span>
             </div>
-        </div>
-    </section>
-
-    <!-- MAIN PRODUCT CATALOG -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        
-        <!-- Category Filter & Items Counter -->
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-8 border-b border-slate-200">
-            <div>
-                <h2 class="text-2xl font-bold text-slate-900 font-serif">Catalog Collection</h2>
-                <p id="itemCountText" class="text-xs text-slate-500 mt-0.5">Showing all products</p>
-            </div>
-
-            <!-- Filter Buttons -->
-            <div class="flex flex-wrap items-center gap-2 bg-slate-200/60 p-1.5 rounded-full text-xs font-semibold">
-                <button onclick="filterCategory('All')" id="btn-All" class="category-btn px-4 py-2 rounded-full bg-white text-brand-700 shadow-sm transition-all">
-                    All Items
+            <div class="flex items-center space-x-4">
+                <label class="flex items-center space-x-2 cursor-pointer bg-white/20 px-3 py-1 rounded-lg">
+                    <span class="font-semibold">Enable Image Uploads & Price Adjustments:</span>
+                    <input type="checkbox" id="toggleEditMode" onchange="toggleEditingMode(this.checked)" class="w-4 h-4 rounded text-pink-600 focus:ring-pink-400">
+                </label>
+                <button onclick="openAdminDashboard()" class="bg-white text-amber-800 font-bold px-3 py-1 rounded-lg hover:bg-amber-50 transition shadow-sm">
+                    <i class="fa-solid fa-sliders mr-1"></i> Admin Control Panel
                 </button>
-                <button onclick="filterCategory('Dresses')" id="btn-Dresses" class="category-btn px-4 py-2 rounded-full text-slate-600 hover:text-slate-900 transition-all">
-                    👗 Dresses
-                </button>
-                <button onclick="filterCategory('Shoes')" id="btn-Shoes" class="category-btn px-4 py-2 rounded-full text-slate-600 hover:text-slate-900 transition-all">
-                    👟 Shoes
-                </button>
-                <button onclick="filterCategory('Boots')" id="btn-Boots" class="category-btn px-4 py-2 rounded-full text-slate-600 hover:text-slate-900 transition-all">
-                    🥾 Boots
-                </button>
-                <button onclick="filterCategory('Outfits')" id="btn-Outfits" class="category-btn px-4 py-2 rounded-full text-slate-600 hover:text-slate-900 transition-all">
-                    👚 Outfits
+                <button onclick="logoutAdmin()" class="bg-red-700 hover:bg-red-800 text-white px-2.5 py-1 rounded-lg transition">
+                    Logout
                 </button>
             </div>
-        </div>
-
-        <!-- Product Grid -->
-        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-8">
-            <!-- JavaScript Populates Product Cards -->
-        </div>
-
-        <!-- Empty State -->
-        <div id="noResults" class="hidden text-center py-16">
-            <div class="w-16 h-16 bg-pink-100 text-brand-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <h3 class="text-lg font-bold text-slate-800">No matching items found</h3>
-            <p class="text-xs text-slate-500 mt-1">Try searching for a different item name or switch categories.</p>
-            <button onclick="resetFilters()" class="mt-4 px-5 py-2.5 bg-brand-500 text-white text-xs font-bold rounded-full hover:bg-brand-600 transition-colors shadow-sm">
-                Reset All Filters
-            </button>
-        </div>
-    </main>
-
-    <!-- FOOTER WITH ADMIN BUTTON -->
-    <footer class="bg-slate-950 text-slate-400 text-xs border-t border-slate-900 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <div>
-                <span class="font-serif text-lg font-bold text-white">Vakaa Stores<span class="text-brand-500">.</span></span>
-                <p class="text-slate-500 text-[11px] mt-0.5">&copy; 2026 Vakaa Stores Inc. All rights reserved.</p>
-            </div>
-
-            <!-- ADMIN ACCESS BUTTON -->
-            <button onclick="openAdminPrompt()" class="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800 hover:border-brand-500 text-slate-300 hover:text-white text-xs font-semibold transition-all shadow-sm">
-                <i class="fa-solid fa-lock text-brand-400"></i>
-                <span>Admin Login</span>
-            </button>
-        </div>
-    </footer>
-
-    <!-- CART SLIDE-OUT DRAWER OVERLAY -->
-    <div id="cartOverlay" onclick="toggleCart(false)" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-40 hidden transition-opacity"></div>
-
-    <!-- CART DRAWER -->
-    <div id="cartDrawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col">
-        <!-- Cart Header -->
-        <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-pink-50/50">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-bag-shopping text-brand-600"></i>
-                <h3 class="font-bold text-slate-800 text-base">Your Bag</h3>
-                <span id="drawerCartBadge" class="bg-brand-100 text-brand-700 text-xs px-2.5 py-0.5 rounded-full font-bold">0 items</span>
-            </div>
-            <button onclick="toggleCart(false)" class="w-8 h-8 rounded-full hover:bg-slate-200/60 flex items-center justify-center text-slate-500 transition-colors">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-        </div>
-
-        <!-- Cart Items Container -->
-        <div id="cartItemsList" class="flex-1 overflow-y-auto p-4 space-y-4">
-            <!-- Dynamically populated by JS -->
-        </div>
-
-        <!-- Cart Summary & Checkout -->
-        <div class="p-4 border-t border-slate-100 bg-slate-50 space-y-3">
-            <div class="space-y-1 text-xs">
-                <div class="flex justify-between text-slate-500">
-                    <span>Subtotal</span>
-                    <span id="cartSubtotal">$0.00</span>
-                </div>
-                <div class="flex justify-between text-slate-500">
-                    <span>Shipping</span>
-                    <span class="text-emerald-600 font-semibold">FREE</span>
-                </div>
-                <div class="flex justify-between text-sm font-bold text-slate-900 pt-2 border-t border-slate-200">
-                    <span>Total</span>
-                    <span id="cartTotal" class="text-brand-600">$0.00</span>
-                </div>
-            </div>
-
-            <button onclick="openCheckoutModal()" class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl shadow-md shadow-brand-500/20 active:scale-98 transition-all flex items-center justify-center gap-2">
-                <span>Proceed to Checkout</span>
-                <i class="fa-solid fa-arrow-right text-xs"></i>
-            </button>
         </div>
     </div>
 
-    <!-- CHECKOUT MODAL WITH MANUAL PAYMENT GATEWAYS & EVIDENCE UPLOAD -->
-    <div id="checkoutModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative my-8 max-h-[90vh] overflow-y-auto">
-            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl">
-                <i class="fa-solid fa-xmark"></i>
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Hero Banner -->
+        <div class="relative overflow-hidden bg-gradient-to-r from-pink-200 via-pink-100 to-rose-100 rounded-3xl p-6 sm:p-10 mb-8 border border-pink-200 shadow-sm">
+            <div class="relative z-10 max-w-2xl">
+                <span class="inline-block bg-white/80 backdrop-blur-sm text-pink-600 font-semibold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-3">Trending Collections</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 serif-title leading-tight mb-2">Beautiful Styles for Ages 12 to 15</h2>
+                <p class="text-gray-600 text-sm sm:text-base mb-6">Discover shiny necklaces, elegant party dresses, sparkly accessories, and soft pink sneakers designed specifically for teens.</p>
+                <a href="#productsSection" class="inline-flex items-center bg-pink-500 hover:bg-pink-600 text-white font-medium px-5 py-2.5 rounded-xl shadow-md transition">
+                    Shop Now <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                </a>
+            </div>
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-pink-300/30 rounded-full blur-2xl"></div>
+        </div>
+
+        <!-- Filter Bar & Admin Add Item Button -->
+        <div id="productsSection" class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+            <div class="flex items-center space-x-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
+                <button onclick="filterCategory('All')" class="cat-btn active bg-pink-500 text-white px-4 py-2 rounded-xl text-sm font-medium shadow-sm transition whitespace-nowrap" data-cat="All">All Items</button>
+                <button onclick="filterCategory('Sneakers')" class="cat-btn bg-white hover:bg-pink-50 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium shadow-sm transition whitespace-nowrap" data-cat="Sneakers">Shoes & Sneakers</button>
+                <button onclick="filterCategory('Dresses')" class="cat-btn bg-white hover:bg-pink-50 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium shadow-sm transition whitespace-nowrap" data-cat="Dresses">Dresses</button>
+                <button onclick="filterCategory('Necklaces')" class="cat-btn bg-white hover:bg-pink-50 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium shadow-sm transition whitespace-nowrap" data-cat="Necklaces">Necklaces & Jewelry</button>
+            </div>
+
+            <!-- Admin Add Button -->
+            <button id="addNewProductBtn" onclick="openAddProductModal()" class="hidden w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-md transition flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-plus-circle"></i>
+                <span>Add New Product</span>
             </button>
-            
-            <div class="text-center mb-5">
-                <div class="w-12 h-12 bg-pink-100 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
-                    <i class="fa-solid fa-money-bill-transfer"></i>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Dynamic products render here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-pink-100 py-6 mt-12 text-center text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>© 2026 Jean Stores. Beautiful clothing, sneakers & necklaces for girls aged 12-15.</p>
+            <p class="mt-1 text-gray-400">All payments and proof submissions are processed securely.</p>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Drawer -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity" onclick="toggleCartDrawer()"></div>
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <div class="p-5 bg-gradient-to-r from-pink-500 to-rose-500 text-white flex justify-between items-center">
+                    <h3 class="text-lg font-bold flex items-center"><i class="fa-solid fa-bag-shopping mr-2"></i> Shopping Bag</h3>
+                    <button onclick="toggleCartDrawer()" class="text-white hover:text-pink-100 p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
                 </div>
-                <h3 class="text-xl font-bold text-slate-900 font-serif">Checkout & Payment</h3>
-                <p class="text-xs text-slate-500 mt-1">Select payment method, copy details, and upload your payment receipt.</p>
-            </div>
-
-            <!-- PAYMENT METHODS INSTRUCTIONS -->
-            <div class="space-y-2 mb-5">
-                <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider">1. Select Payment Method:</label>
-
-                <!-- Zelle Card -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-xs">Z</div>
-                        <div>
-                            <div class="text-xs font-bold text-slate-900">Zelle</div>
-                            <div class="text-[11px] text-slate-600 font-mono">7736004031 <span class="text-slate-400">(Jeanina Herrera)</span></div>
-                        </div>
-                    </div>
-                    <button onclick="copyToClipboard('7736004031', 'Zelle number')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-[11px] font-bold text-slate-700 hover:bg-slate-100 transition-colors shadow-xs">
-                        <i class="fa-regular fa-copy"></i> Copy
-                    </button>
-                </div>
-
-                <!-- Cash App Card -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">$</div>
-                        <div>
-                            <div class="text-xs font-bold text-slate-900">Cash App</div>
-                            <div class="text-[11px] text-slate-600 font-mono">$JeaninaInga</div>
-                        </div>
-                    </div>
-                    <button onclick="copyToClipboard('$JeaninaInga', 'Cash App tag')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-[11px] font-bold text-slate-700 hover:bg-slate-100 transition-colors shadow-xs">
-                        <i class="fa-regular fa-copy"></i> Copy
-                    </button>
+                
+                <div id="cartItemsContainer" class="flex-grow overflow-y-auto p-5 space-y-4 custom-scrollbar">
+                    <!-- Dynamic cart items -->
                 </div>
 
-                <!-- PayPal Card -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs"><i class="fa-brands fa-paypal"></i></div>
-                        <div>
-                            <div class="text-xs font-bold text-slate-900">PayPal</div>
-                            <div class="text-[11px] text-slate-600 font-mono">benardierkwagh20@gmail.com</div>
-                        </div>
+                <div class="p-5 border-t border-gray-100 bg-gray-50 space-y-4">
+                    <div class="flex justify-between text-base font-bold text-gray-900">
+                        <span>Total Amount:</span>
+                        <span id="cartTotalAmount" class="text-pink-600">$0.00</span>
                     </div>
-                    <button onclick="copyToClipboard('benardierkwagh20@gmail.com', 'PayPal Email')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-[11px] font-bold text-slate-700 hover:bg-slate-100 transition-colors shadow-xs">
-                        <i class="fa-regular fa-copy"></i> Copy
+                    <button onclick="openCheckoutModal()" id="checkoutButton" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 rounded-xl shadow-md transition disabled:opacity-50 disabled:cursor-not-allowed">
+                        Proceed to Checkout
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- CHECKOUT FORM -->
-            <form onsubmit="handleCheckoutSubmit(event)" class="space-y-3 text-xs">
-                <div class="border-t border-slate-100 pt-3">
-                    <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">2. Customer Details:</label>
+    <!-- Admin Password Login Modal -->
+    <div id="adminLoginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/50 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative border border-pink-100">
+            <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fa-solid fa-lock text-xl"></i>
                 </div>
+                <h3 class="text-xl font-bold text-gray-900">Admin Authentication</h3>
+                <p class="text-xs text-gray-500 mt-1">Please enter your store password to access admin features.</p>
+            </div>
 
+            <form onsubmit="submitAdminPassword(event)" class="space-y-4">
                 <div>
-                    <label class="block font-semibold text-slate-700 mb-1">Full Name *</label>
-                    <input type="text" id="custName" required placeholder="e.g. Jane Doe" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none">
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Admin Password</label>
+                    <input type="password" id="adminPasswordInput" placeholder="Enter password" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 focus:outline-none text-sm" required>
                 </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Email Address *</label>
-                        <input type="email" id="custEmail" required placeholder="jane@example.com" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none">
-                    </div>
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1">WhatsApp Phone Number *</label>
-                        <input type="tel" id="custWhatsapp" required placeholder="+1 234 567 8900" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block font-semibold text-slate-700 mb-1">Full Delivery Address *</label>
-                    <textarea id="custAddress" required rows="2" placeholder="Street address, City, State, Zip Code" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none"></textarea>
-                </div>
-
-                <!-- PAYMENT PROOF EVIDENCE UPLOAD -->
-                <div class="bg-pink-50/60 p-3 rounded-2xl border border-pink-200 space-y-1.5">
-                    <label class="block font-bold text-brand-900 flex items-center justify-between">
-                        <span>Upload Evidence / Proof of Payment *</span>
-                        <i class="fa-solid fa-paperclip text-brand-500"></i>
-                    </label>
-                    <p class="text-[10px] text-slate-500">Please attach a screenshot or image receipt of your completed transfer.</p>
-                    <input type="file" id="custProof" accept="image/*" required onchange="handleProofUpload(event)" class="w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-500 file:text-white hover:file:bg-brand-600 cursor-pointer">
-                    <div id="proofPreviewText" class="text-[11px] text-emerald-600 font-bold hidden">✓ Receipt screenshot attached</div>
-                </div>
-
-                <div class="pt-2 flex justify-between items-center text-sm font-bold border-t border-slate-200">
-                    <span>Total Amount:</span>
-                    <span id="checkoutTotalAmount" class="text-brand-600 text-lg">$0.00</span>
-                </div>
-
-                <button type="submit" class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl shadow-lg transition-colors text-sm">
-                    Submit Order & Evidence
+                <p id="adminErrorMsg" class="text-xs text-red-500 hidden text-center"><i class="fa-solid fa-circle-exclamation mr-1"></i> Incorrect password. Please try again.</p>
+                <button type="submit" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold py-2.5 rounded-xl shadow-md hover:from-pink-600 hover:to-rose-600 transition text-sm">
+                    Unlock Admin Panel
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- ADMIN DASHBOARD MODAL -->
-    <div id="adminModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl relative max-h-[90vh] flex flex-col">
-            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+    <!-- Admin Control Panel Dashboard Modal -->
+    <div id="adminDashboardModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/50 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-4xl w-full p-6 shadow-2xl relative max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center pb-4 border-b border-gray-100">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 serif-title">Admin Control Dashboard</h3>
+                    <p class="text-xs text-gray-500">Manage orders, update catalog items, and security settings</p>
+                </div>
+                <button onclick="closeAdminDashboard()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
 
-            <!-- Admin Header -->
-            <div class="border-b border-slate-100 pb-4 mb-4 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-2xl bg-slate-900 text-brand-400 flex items-center justify-center text-lg">
-                        <i class="fa-solid fa-user-shield"></i>
+            <!-- Admin Nav Tabs -->
+            <div class="flex border-b border-gray-200 mt-4 space-x-6 text-xs sm:text-sm font-semibold">
+                <button onclick="switchAdminTab('orders')" id="tabBtnOrders" class="pb-2 text-pink-600 border-b-2 border-pink-500 flex items-center space-x-1">
+                    <i class="fa-solid fa-list-check"></i> <span>Received Orders</span>
+                </button>
+                <button onclick="switchAdminTab('security')" id="tabBtnSecurity" class="pb-2 text-gray-500 hover:text-gray-700 flex items-center space-x-1">
+                    <i class="fa-solid fa-key"></i> <span>Security & Password</span>
+                </button>
+            </div>
+
+            <!-- Tab 1: Orders -->
+            <div id="adminTabOrders" class="flex-grow overflow-y-auto py-4 space-y-4 custom-scrollbar">
+                <!-- Orders dynamic rendering -->
+            </div>
+
+            <!-- Tab 2: Security / Password Change -->
+            <div id="adminTabSecurity" class="hidden py-6 space-y-4 max-w-md">
+                <h4 class="font-bold text-sm text-gray-800">Change Admin Password</h4>
+                <p class="text-xs text-gray-500">Set a new secure password for accessing your admin panel. This password will be saved in your browser storage.</p>
+                
+                <form onsubmit="handleUpdatePassword(event)" class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Current Password</label>
+                        <input type="password" id="currPassInput" class="w-full px-3 py-2 rounded-xl border border-gray-300 text-sm" required>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-slate-900 font-serif">Store Admin Portal</h3>
-                        <p class="text-xs text-slate-500">Manage editing permissions and view submitted orders.</p>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">New Password</label>
+                        <input type="password" id="newPassInput" class="w-full px-3 py-2 rounded-xl border border-gray-300 text-sm" required>
                     </div>
-                </div>
-
-                <!-- Mode Toggle -->
-                <div class="flex items-center gap-3 bg-slate-100 p-2 rounded-2xl border border-slate-200">
-                    <span class="text-xs font-bold text-slate-700">Edit Mode:</span>
-                    <button id="editToggleBtn" onclick="toggleEditMode()" class="px-4 py-1.5 rounded-xl text-xs font-extrabold transition-all bg-slate-300 text-slate-700">
-                        OFF
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Confirm New Password</label>
+                        <input type="password" id="confirmPassInput" class="w-full px-3 py-2 rounded-xl border border-gray-300 text-sm" required>
+                    </div>
+                    <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition">
+                        Update Admin Password
                     </button>
-                </div>
-            </div>
-
-            <!-- Modal Body Tabs / Order Submissions -->
-            <div class="flex-1 overflow-y-auto space-y-4 pr-1">
-                <div class="flex items-center justify-between">
-                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-boxes-packing text-brand-500"></i>
-                        <span>Customer Orders & Delivery Submissions</span>
-                    </h4>
-                    <button onclick="clearOrders()" class="text-[11px] text-rose-500 font-bold hover:underline">Clear Orders</button>
-                </div>
-
-                <div id="adminOrdersContainer" class="space-y-3">
-                    <!-- Orders Populated Here -->
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="pt-4 border-t border-slate-100 flex justify-end">
-                <button onclick="closeAdminModal()" class="px-5 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800">
-                    Close Admin Panel
-                </button>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATIONS CONTAINER -->
-    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+    <!-- Product Upload/Edit Modal -->
+    <div id="productFormModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/50 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 id="productModalTitle" class="text-xl font-bold text-gray-900 mb-4 serif-title">Add New Product</h3>
 
-    <!-- JAVASCRIPT ENGINE -->
-    <script>
-        // CONFIG & SECURITY
-        const ADMIN_PASSCODE = "vakaa2026"; // Change default admin password here
-        let isAdminEditMode = false;
-        let proofDataUrl = null;
+            <form onsubmit="saveProduct(event)" class="space-y-4">
+                <input type="hidden" id="editProductId">
 
-        // CATALOG PRODUCTS DATA
-        let products = [
-            { id: 1, name: "Pink Glitter Pearl Strap Princess Shoes", image: "images/500791.webp", category: "Shoes", price: 34.99, rating: 4.9, reviews: 42, tag: "Bestseller", desc: "Glittery pink dress shoes with elegant pearl strap details." },
-            { id: 2, name: "Dream Pairs Rainbow Gradient Sneakers", image: "images/500794.jpg", category: "Shoes", price: 29.99, rating: 4.8, reviews: 35, tag: "Popular", desc: "Vibrant gradient purple-to-pink comfortable running shoes." },
-            { id: 3, name: "On Running Cloud-Style Soft Pink Sneakers", image: "images/500793.jpg", category: "Shoes", price: 49.99, rating: 4.7, reviews: 28, tag: "New", desc: "Lightweight cushioned mesh runners for all-day comfort." },
-            { id: 4, name: "Pink Hearts Graffiti Print Streetwear Sneakers", image: "images/500792.webp", category: "Shoes", price: 32.99, rating: 4.9, reviews: 19, tag: "Trending", desc: "Bright pink lace-up shoes with metallic graffiti hearts." },
-            { id: 5, name: "Kurt Geiger London Hot Pink Platform Sneakers", image: "images/500795.avif", category: "Shoes", price: 58.99, rating: 5.0, reviews: 51, tag: "Luxury", desc: "Statement hot pink platform shoes with crystal embellishments." },
-            { id: 6, name: "Hello Kitty Light-Up Pink Kids Sneakers", image: "images/500796.avif", category: "Shoes", price: 27.99, rating: 4.9, reviews: 64, tag: "Kids Favorite", desc: "Adorable sneakers with flashing LED soles and character details." },
-            { id: 7, name: "Hot Pink Bow Platform Ankle Strap Sandals", image: "images/500797.avif", category: "Shoes", price: 25.99, rating: 4.6, reviews: 22, tag: "Summer", desc: "White platform soles topped with oversized pink bows." },
-            { id: 8, name: "Jordan Retro Pink Elephant Print High-Tops", image: "images/500798.avif", category: "Shoes", price: 64.99, rating: 5.0, reviews: 88, tag: "Exclusive", desc: "Retro high-top sneakers with iconic pink elephant pattern." },
-            { id: 9, name: "Hello Kitty & Friends Pink Combat Boots", image: "images/500799.jpg", category: "Boots", price: 42.99, rating: 4.8, reviews: 31, tag: "Autumn Chic", desc: "Lace-up pastel pink combat boots with heavy rubber soles." },
-            { id: 10, name: "New Balance Iridescent Gray & Pink Sneakers", image: "images/500800.jpg", category: "Shoes", price: 28.99, rating: 4.7, reviews: 18, tag: "Classic", desc: "Soft gray and pink mesh sneakers with iridescent accents." },
-            { id: 11, name: "Hunter x LoveShackFancy Floral Pink Rain Boots", image: "images/500802.jpg", category: "Boots", price: 45.99, rating: 4.9, reviews: 27, tag: "Rainy Days", desc: "Waterproof pink rubber boots with romantic floral prints." },
-            { id: 12, name: "Pastel Pink Unicorn Plush Winter Snow Boots", image: "images/500801.jpg", category: "Boots", price: 38.99, rating: 4.8, reviews: 44, tag: "Cozy Warm", desc: "Fleece-lined winter boots featuring magical pastel unicorn theme." },
-            { id: 13, name: "Romantic Pink Satin Halter Backless Party Dress", image: "images/500803.jpg", category: "Dresses", price: 52.99, rating: 5.0, reviews: 39, tag: "Formal Gown", desc: "Luxe satin halter dress featuring a flared full skirt." },
-            { id: 14, name: "LA 91 Cheerleader Crop Hoodie & Skirt Set", image: "images/500804.avif", category: "Outfits", price: 39.99, rating: 4.7, reviews: 25, tag: "Matching Set", desc: "Trendy 3-piece outfit with crop hoodie, tank, and pleated skirt." },
-            { id: 15, name: "One-Shoulder Sequined Pink Tulle High-Low Dress", image: "images/500805.avif", category: "Dresses", price: 48.99, rating: 4.9, reviews: 33, tag: "Sparkle", desc: "Shimmering sequin top with high-low asymmetrical tulle hem." },
-            { id: 16, name: "Casual Pink Ruffle Sleeve Layered Tulle Dress", image: "images/500806.avif", category: "Dresses", price: 36.99, rating: 4.6, reviews: 21, tag: "Sweet Style", desc: "Ribbed bodice dress with flutter sleeves and soft tulle overlay." },
-            { id: 17, name: "Elegant Pink Dot Tulle Wing-Sleeve Princess Dress", image: "images/500814.jpg", category: "Dresses", price: 59.99, rating: 4.9, reviews: 57, tag: "Party Favorite", desc: "Fairytale polka-dot glitter gown with wing-sleeve accents." },
-            { id: 18, name: "Luxury Feather & Sequin Off-the-Shoulder Ball Gown", image: "images/500813.jpg", category: "Dresses", price: 89.99, rating: 5.0, reviews: 62, tag: "Couture", desc: "Bespoke royal pageant ballgown with soft feather trim." },
-            { id: 19, name: "3D Floral Applique Pink A-Line Party Dress", image: "images/500815.jpg", category: "Dresses", price: 44.99, rating: 4.8, reviews: 30, tag: "Boutique", desc: "Sleeveless dress adorned with soft 3D flower appliqués." }
-        ];
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Product Title</label>
+                    <input type="text" id="prodTitle" placeholder="e.g. Pink Sparkle Sneakers" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 text-sm" required>
+                </div>
 
-        // APP STATE
-        let cart = [];
-        let ordersList = [];
-        let currentCategory = 'All';
-        let searchQuery = '';
-
-        // DOM ELEMENTS
-        const productGrid = document.getElementById('productGrid');
-        const noResults = document.getElementById('noResults');
-        const itemCountText = document.getElementById('itemCountText');
-        const cartCountBadge = document.getElementById('cartCountBadge');
-        const drawerCartBadge = document.getElementById('drawerCartBadge');
-        const cartSubtotal = document.getElementById('cartSubtotal');
-        const cartTotal = document.getElementById('cartTotal');
-        const cartItemsList = document.getElementById('cartItemsList');
-
-        // INITIAL RENDER
-        window.addEventListener('DOMContentLoaded', () => {
-            renderProducts();
-        });
-
-        // GENERATE FALLBACK SVG PLACEHOLDER
-        function generateSvgFallback(productName, category) {
-            const isDress = category === 'Dresses' || category === 'Outfits';
-            const iconSvg = isDress 
-                ? `<path d="M12 2L8 6V9L4 12V22H20V12L16 9V6L12 2Z" fill="none" stroke="#be185d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 9C8 9 10 11 12 11C14 11 16 9 16 9" stroke="#be185d" stroke-width="1.5"/>`
-                : `<path d="M2 18H22V20H2V18ZM2 14C2 14 5 10 9 10C12 10 14 13 18 13C20 13 22 15 22 18H2V14Z" fill="none" stroke="#db2777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 10L11 6L14 8" stroke="#db2777" stroke-width="1.5" stroke-linecap="round"/>`;
-
-            const encodedSvg = encodeURIComponent(`
-                <svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="300" height="200" rx="16" fill="#fbcfe8" />
-                    <rect x="12" y="12" width="276" height="176" rx="12" fill="white" fill-opacity="0.7" stroke="#db2777" stroke-width="1" stroke-dasharray="4 4"/>
-                    <g transform="translate(132, 45) scale(1.5)">${iconSvg}</g>
-                    <rect x="20" y="130" width="260" height="40" rx="8" fill="white" filter="drop-shadow(0px 2px 4px rgba(0,0,0,0.05))"/>
-                    <text x="150" y="154" fill="#9d174d" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">
-                        ${productName.substring(0, 30)}...
-                    </text>
-                </svg>
-            `);
-
-            return `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
-        }
-
-        // RENDER PRODUCTS GRID
-        function renderProducts() {
-            const filtered = products.filter(p => {
-                const matchesCategory = currentCategory === 'All' || p.category === currentCategory;
-                const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                      p.desc.toLowerCase().includes(searchQuery.toLowerCase());
-                return matchesCategory && matchesSearch;
-            });
-
-            itemCountText.textContent = `Showing ${filtered.length} of ${products.length} products`;
-
-            if (filtered.length === 0) {
-                productGrid.innerHTML = '';
-                noResults.classList.remove('hidden');
-                return;
-            }
-
-            noResults.classList.add('hidden');
-            productGrid.innerHTML = filtered.map(product => {
-                const fallbackUrl = generateSvgFallback(product.name, product.category);
-
-                return `
-                <div class="product-card bg-white rounded-3xl border border-pink-100/80 shadow-sm hover:shadow-xl hover:border-pink-200 transition-all duration-300 flex flex-col overflow-hidden group relative">
-                    
-                    <!-- Image Box -->
-                    <div class="relative h-56 bg-pink-50/40 p-2 flex items-center justify-center overflow-hidden">
-                        <span class="absolute top-3 left-3 z-10 bg-white/90 backdrop-blur-md text-slate-800 text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full shadow-xs tracking-wider">
-                            ${product.tag}
-                        </span>
-
-                        <!-- Image Upload Button (ONLY VISIBLE IN ADMIN EDIT MODE) -->
-                        ${isAdminEditMode ? `
-                            <label class="absolute top-3 right-3 z-20 bg-brand-600 text-white p-2 rounded-full cursor-pointer hover:bg-brand-700 shadow-md transition-transform active:scale-90" title="Upload Image for this product">
-                                <i class="fa-solid fa-camera text-xs"></i>
-                                <input type="file" accept="image/*" class="hidden" onchange="uploadProductImage(event, ${product.id})">
-                            </label>
-                        ` : ''}
-
-                        <img src="${product.image}" 
-                             id="img-prod-${product.id}"
-                             alt="${product.name}" 
-                             onerror="this.onerror=null; this.src='${fallbackUrl}';"
-                             class="product-img w-full h-full object-cover rounded-2xl transition-transform duration-500 ease-out">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Category</label>
+                        <select id="prodCategory" class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 text-sm">
+                            <option value="Sneakers">Sneakers / Shoes</option>
+                            <option value="Dresses">Dresses</option>
+                            <option value="Necklaces">Necklaces / Jewelry</option>
+                        </select>
                     </div>
-
-                    <!-- Details -->
-                    <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
-                        <div>
-                            <div class="flex items-center justify-between gap-1 text-xs text-amber-500 font-semibold mb-1">
-                                <span><i class="fa-solid fa-star text-amber-400"></i> ${product.rating.toFixed(1)} <span class="text-slate-400 font-normal">(${product.reviews})</span></span>
-                                <span class="text-[10px] text-brand-600 font-bold uppercase tracking-wider bg-pink-50 px-2.5 py-0.5 rounded-full">${product.category}</span>
-                            </div>
-                            <h3 class="font-bold text-slate-900 text-sm leading-snug group-hover:text-brand-600 transition-colors">
-                                ${product.name}
-                            </h3>
-                            <p class="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                                ${product.desc}
-                            </p>
-                        </div>
-
-                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                            <div>
-                                <span class="text-[10px] text-slate-400 block font-medium uppercase">Price</span>
-                                
-                                <!-- Admin Price Input OR Display Price -->
-                                ${isAdminEditMode ? `
-                                    <div class="flex items-center gap-1">
-                                        <span class="text-xs font-bold text-brand-600">$</span>
-                                        <input type="number" step="0.01" value="${product.price.toFixed(2)}" onchange="updateProductPrice(${product.id}, this.value)" class="w-16 px-1.5 py-0.5 text-xs font-bold border border-brand-300 rounded-lg bg-pink-50 text-slate-900 focus:outline-none focus:ring-1 focus:ring-brand-500">
-                                    </div>
-                                ` : `
-                                    <span class="text-lg font-extrabold text-slate-900">$${product.price.toFixed(2)}</span>
-                                `}
-                            </div>
-
-                            <button onclick="addToCart(${product.id})" class="px-4 py-2 bg-slate-900 hover:bg-brand-600 text-white rounded-full text-xs font-bold transition-all shadow-sm active:scale-95 flex items-center gap-1.5">
-                                <i class="fa-solid fa-plus text-[10px]"></i>
-                                <span>Add to Bag</span>
-                            </button>
-                        </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Price ($ USD)</label>
+                        <input type="number" step="0.01" id="prodPrice" placeholder="29.99" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 text-sm" required>
                     </div>
                 </div>
-            `}).join('');
-        }
 
-        // ADMIN FUNCTIONS
-        function openAdminPrompt() {
-            const entered = prompt("🔑 Enter Admin Password:");
-            if (entered === ADMIN_PASSCODE) {
-                showToast("Admin access granted!");
-                openAdminModal();
-            } else if (entered !== null) {
-                alert("Incorrect Password! Access denied.");
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Target Age Range</label>
+                    <input type="text" id="prodAge" value="Ages 12-15" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 text-sm" required>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Upload Product Image</label>
+                    <input type="file" id="prodImageFile" accept="image/*" onchange="handleImageUpload(event)" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100 mb-2">
+                    <input type="text" id="prodImageUrl" placeholder="Or enter image URL" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 text-sm">
+                    <div id="imagePreviewContainer" class="mt-2 hidden">
+                        <p class="text-xs text-gray-400 mb-1">Image Preview:</p>
+                        <img id="imagePreview" src="" class="w-24 h-24 object-cover rounded-xl border border-gray-200">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Description</label>
+                    <textarea id="prodDesc" rows="3" placeholder="Describe the item..." class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2.5 rounded-xl shadow-md transition text-sm">
+                    Save Item to Store
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Checkout Modal with Payment Details & File Evidence Upload -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/50 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            
+            <h3 class="text-2xl font-bold text-gray-900 mb-1 serif-title">Complete Your Order</h3>
+            <p class="text-xs text-gray-500 mb-6">Select a payment option below, send payment, and upload your screenshot proof.</p>
+
+            <!-- Payment Methods Box -->
+            <div class="bg-pink-50/70 border border-pink-200 rounded-2xl p-4 mb-6 space-y-3">
+                <h4 class="text-xs font-bold text-pink-800 uppercase tracking-wider flex items-center">
+                    <i class="fa-solid fa-wallet mr-1.5"></i> Payment Methods (Tap to Copy)
+                </h4>
+
+                <!-- Zelle -->
+                <div class="bg-white p-3 rounded-xl border border-pink-100 flex items-center justify-between shadow-sm">
+                    <div>
+                        <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded">ZELLE</span>
+                        <p class="text-sm font-semibold text-gray-800 mt-1">7736004031</p>
+                        <p class="text-xs text-gray-500">Name: Jeanina Herrera</p>
+                    </div>
+                    <button onclick="copyText('7736004031', this)" class="bg-purple-100 hover:bg-purple-200 text-purple-800 text-xs font-bold px-3 py-1.5 rounded-lg transition">
+                        <i class="fa-regular fa-copy mr-1"></i> Copy
+                    </button>
+                </div>
+
+                <!-- Cash App -->
+                <div class="bg-white p-3 rounded-xl border border-pink-100 flex items-center justify-between shadow-sm">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">CASH APP</span>
+                        <p class="text-sm font-semibold text-gray-800 mt-1">$JeaninaInga</p>
+                    </div>
+                    <button onclick="copyText('$JeaninaInga', this)" class="bg-emerald-100 hover:bg-emerald-200 text-emerald-800 text-xs font-bold px-3 py-1.5 rounded-lg transition">
+                        <i class="fa-regular fa-copy mr-1"></i> Copy
+                    </button>
+                </div>
+
+                <!-- PayPal -->
+                <div class="bg-white p-3 rounded-xl border border-pink-100 flex items-center justify-between shadow-sm">
+                    <div>
+                        <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">PAYPAL</span>
+                        <p class="text-sm font-semibold text-gray-800 mt-1">benardierkwagh20@gmail.com</p>
+                    </div>
+                    <button onclick="copyText('benardierkwagh20@gmail.com', this)" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold px-3 py-1.5 rounded-lg transition">
+                        <i class="fa-regular fa-copy mr-1"></i> Copy
+                    </button>
+                </div>
+            </div>
+
+            <!-- Customer Checkout Form -->
+            <form onsubmit="submitCustomerOrder(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Full Name *</label>
+                        <input type="text" id="buyerName" placeholder="Buyer's name" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 text-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Email Address *</label>
+                        <input type="email" id="buyerEmail" placeholder="yourname@gmail.com" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 text-sm" required>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">WhatsApp Phone Number *</label>
+                        <input type="tel" id="buyerPhone" placeholder="+1 (555) 000-0000" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 text-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Payment Method Used *</label>
+                        <select id="buyerPaymentMethod" class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 text-sm" required>
+                            <option value="Zelle">Zelle (7736004031)</option>
+                            <option value="Cash App">Cash App ($JeaninaInga)</option>
+                            <option value="PayPal">PayPal (benardierkwagh20@gmail.com)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Full Delivery Address *</label>
+                    <textarea id="buyerAddress" rows="2" placeholder="Street address, City, Zip Code" class="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 text-sm" required></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Upload Payment Proof Screenshot *</label>
+                    <input type="file" id="proofFile" accept="image/*" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100" required>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold py-3 rounded-xl shadow-lg transition text-base">
+                        Submit Order & Payment Proof
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Proof Image Preview Modal -->
+    <div id="proofModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/80 backdrop-blur-md hidden" onclick="closeProofModal()">
+        <div class="max-w-xl w-full bg-white rounded-2xl p-4 relative" onclick="event.stopPropagation()">
+            <button onclick="closeProofModal()" class="absolute top-2 right-2 text-gray-500 bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
+            <h4 class="font-bold text-gray-800 text-sm mb-2">Payment Proof Screenshot</h4>
+            <img id="proofModalImg" src="" class="max-h-[75vh] mx-auto object-contain rounded-lg border">
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-gray-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-2 transform translate-y-20 opacity-0 transition-all duration-300">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-green-400"></i>
+        <span id="toastMsg" class="text-sm font-medium">Notification</span>
+    </div>
+
+    <!-- JavaScript Application Engine -->
+    <script>
+        // Default Catalog Data
+        const INITIAL_PRODUCTS = [
+            {
+                id: 'p1',
+                title: 'Beautiful Pink Floral Sneakers',
+                category: 'Sneakers',
+                price: 45.99,
+                age: 'Ages 12-15',
+                image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80',
+                description: 'Soft cushioned trendy pink sneakers perfect for school and weekend outings.'
+            },
+            {
+                id: 'p2',
+                title: 'Sparkly Gold Pendant Necklace',
+                category: 'Necklaces',
+                price: 24.50,
+                age: 'Ages 12-15',
+                image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80',
+                description: 'Delicate gold-plated necklace with sparkling star charm.'
+            },
+            {
+                id: 'p3',
+                title: 'Elegant Pink Party Dress',
+                category: 'Dresses',
+                price: 52.00,
+                age: 'Ages 12-15',
+                image: 'https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=600&q=80',
+                description: 'Charming pastel pink party dress with soft lace detail.'
+            },
+            {
+                id: 'p4',
+                title: 'Classic White Casual Shoes',
+                category: 'Sneakers',
+                price: 39.99,
+                age: 'Ages 12-15',
+                image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80',
+                description: 'Clean white casual shoes with cute pink accents.'
             }
-        }
+        ];
 
-        function openAdminModal() {
-            renderAdminOrders();
-            document.getElementById('adminModal').classList.remove('hidden');
-        }
+        // Core Application State
+        let products = [];
+        let cart = [];
+        let orders = [];
+        let adminPassword = 'JeanStoresAdmin2026'; // Default fallback password
+        let isAdminLoggedIn = false;
+        let isEditModeActive = false;
+        let activeCategoryFilter = 'All';
+        let currentUploadedBase64 = '';
 
-        function closeAdminModal() {
-            document.getElementById('adminModal').classList.add('hidden');
-        }
-
-        function toggleEditMode() {
-            isAdminEditMode = !isAdminEditMode;
-            const btn = document.getElementById('editToggleBtn');
-            const banner = document.getElementById('adminModeBanner');
-
-            if (isAdminEditMode) {
-                btn.className = "px-4 py-1.5 rounded-xl text-xs font-extrabold transition-all bg-emerald-500 text-white shadow-sm";
-                btn.textContent = "ON";
-                banner.classList.remove('hidden');
-                showToast("Edit mode turned ON: You can now change prices & upload photos.");
-            } else {
-                btn.className = "px-4 py-1.5 rounded-xl text-xs font-extrabold transition-all bg-slate-300 text-slate-700";
-                btn.textContent = "OFF";
-                banner.classList.add('hidden');
-                showToast("Edit mode turned OFF.");
-            }
-
+        // Application Startup
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeLocalStorage();
             renderProducts();
-        }
+            updateCartCount();
+        });
 
-        function uploadProductImage(event, productId) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const prod = products.find(p => p.id === productId);
-                    if (prod) {
-                        prod.image = e.target.result;
-                        renderProducts();
-                        showToast(`Image updated for "${prod.name}"`);
-                    }
-                };
-                reader.readAsDataURL(file);
+        // Local Storage Sync & Initialization
+        function initializeLocalStorage() {
+            // Admin Password
+            const savedPassword = localStorage.getItem('jean_stores_password');
+            if (savedPassword) {
+                adminPassword = savedPassword;
+            } else {
+                localStorage.setItem('jean_stores_password', adminPassword);
             }
-        }
 
-        function updateProductPrice(productId, newPrice) {
-            const val = parseFloat(newPrice);
-            if (!isNaN(val) && val >= 0) {
-                const prod = products.find(p => p.id === productId);
-                if (prod) {
-                    prod.price = val;
-                    showToast(`Price for "${prod.name}" updated to $${val.toFixed(2)}`);
+            // Products
+            const storedProds = localStorage.getItem('jean_stores_products');
+            if (storedProds) {
+                try {
+                    products = JSON.parse(storedProds);
+                } catch(e) {
+                    products = INITIAL_PRODUCTS;
+                }
+            } else {
+                products = INITIAL_PRODUCTS;
+                localStorage.setItem('jean_stores_products', JSON.stringify(products));
+            }
+
+            // Orders
+            const storedOrders = localStorage.getItem('jean_stores_orders');
+            if (storedOrders) {
+                try {
+                    orders = JSON.parse(storedOrders);
+                } catch(e) {
+                    orders = [];
                 }
             }
         }
 
-        function renderAdminOrders() {
-            const container = document.getElementById('adminOrdersContainer');
+        function saveProductsToStorage() {
+            localStorage.setItem('jean_stores_products', JSON.stringify(products));
+            renderProducts();
+        }
 
-            if (ordersList.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-8 text-slate-400 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
-                        <i class="fa-solid fa-inbox text-3xl mb-2 text-slate-300"></i>
-                        <p class="text-xs">No orders submitted yet.</p>
+        // Render Product Catalog
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            const filtered = activeCategoryFilter === 'All' 
+                ? products 
+                : products.filter(p => p.category === activeCategoryFilter);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-white rounded-3xl border border-pink-100">
+                        <i class="fa-solid fa-box-open text-4xl text-pink-300 mb-3"></i>
+                        <p class="text-gray-500 font-medium text-sm">No items found in this category.</p>
                     </div>
                 `;
                 return;
             }
 
-            container.innerHTML = ordersList.map((order, idx) => `
-                <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl text-xs space-y-2">
-                    <div class="flex justify-between items-center border-b border-slate-200 pb-2">
-                        <span class="font-bold text-brand-700">Order #${idx + 1} - ${order.date}</span>
-                        <span class="font-extrabold text-slate-900">$${order.total.toFixed(2)}</span>
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition border border-pink-100/60 flex flex-col relative group';
+                
+                card.innerHTML = `
+                    <div class="relative aspect-square overflow-hidden bg-pink-50">
+                        <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/600x600/fdf2f8/f472b6?text=Jean+Stores'">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-pink-600 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
+                            ${p.age || 'Ages 12-15'}
+                        </span>
+
+                        <!-- Inline Admin Edit Controls (Visible when Edit Mode is On) -->
+                        ${isEditModeActive ? `
+                            <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center space-x-2">
+                                <button onclick="openEditProductModal('${p.id}')" class="bg-amber-500 hover:bg-amber-600 text-white p-2.5 rounded-full shadow-lg transition" title="Edit Item">
+                                    <i class="fa-solid fa-pen text-sm"></i>
+                                </button>
+                                <button onclick="deleteProduct('${p.id}')" class="bg-red-500 hover:bg-red-600 text-white p-2.5 rounded-full shadow-lg transition" title="Delete Item">
+                                    <i class="fa-solid fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        ` : ''}
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-700">
-                        <div><strong>Customer:</strong> ${order.name}</div>
-                        <div><strong>Email:</strong> ${order.email}</div>
-                        <div><strong>WhatsApp:</strong> ${order.whatsapp}</div>
-                        <div><strong>Address:</strong> ${order.address}</div>
-                    </div>
-
-                    <div class="pt-2">
-                        <strong class="text-slate-800">Items Ordered:</strong>
-                        <ul class="list-disc pl-4 text-[11px] text-slate-600">
-                            ${order.items.map(i => `<li>${i.name} (x${i.quantity}) - $${(i.price * i.quantity).toFixed(2)}</li>`).join('')}
-                        </ul>
-                    </div>
-
-                    ${order.proof ? `
-                        <div class="pt-2 border-t border-slate-200">
-                            <strong class="block text-slate-800 mb-1">Uploaded Payment Evidence:</strong>
-                            <a href="${order.proof}" target="_blank" class="inline-block">
-                                <img src="${order.proof}" class="w-24 h-24 object-cover rounded-xl border border-pink-200 shadow-xs hover:scale-105 transition-transform">
-                            </a>
+                    <div class="p-5 flex flex-col flex-grow justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-pink-500">${p.category}</span>
+                            <h3 class="font-bold text-gray-900 text-base mt-0.5 line-clamp-1">${p.title}</h3>
+                            <p class="text-xs text-gray-500 mt-1 line-clamp-2">${p.description || ''}</p>
                         </div>
-                    ` : ''}
-                </div>
-            `).join('');
-        }
 
-        function clearOrders() {
-            if (confirm("Are you sure you want to clear all recorded orders?")) {
-                ordersList = [];
-                renderAdminOrders();
-                showToast("Orders cleared.");
-            }
-        }
+                        <div class="mt-4 flex items-center justify-between pt-3 border-t border-gray-50">
+                            <div>
+                                <span class="text-xs text-gray-400 block">Price</span>
+                                <span class="text-lg font-extrabold text-gray-900">$${parseFloat(p.price).toFixed(2)}</span>
+                            </div>
 
-        // COPY HELPER
-        function copyToClipboard(text, label) {
-            const dummy = document.createElement('textarea');
-            document.body.appendChild(dummy);
-            dummy.value = text;
-            dummy.select();
-            document.execCommand('copy');
-            document.body.removeChild(dummy);
-
-            showToast(`Copied ${label} to clipboard!`);
-        }
-
-        // PROOF OF PAYMENT UPLOAD
-        function handleProofUpload(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    proofDataUrl = evt.target.result;
-                    document.getElementById('proofPreviewText').classList.remove('hidden');
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // FILTER & SEARCH
-        function filterCategory(category) {
-            currentCategory = category;
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.className = 'category-btn px-4 py-2 rounded-full text-slate-600 hover:text-slate-900 transition-all';
+                            <button onclick="addToCart('${p.id}')" class="bg-pink-50 hover:bg-pink-100 text-pink-600 hover:text-pink-700 font-bold px-4 py-2 rounded-xl text-xs transition flex items-center space-x-1.5">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Add to Bag</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
             });
-            const activeBtn = document.getElementById(`btn-${category}`);
-            if (activeBtn) {
-                activeBtn.className = 'category-btn px-4 py-2 rounded-full bg-white text-brand-700 shadow-sm font-bold transition-all';
-            }
+        }
+
+        // Category Filter
+        function filterCategory(cat) {
+            activeCategoryFilter = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.className = "cat-btn active bg-pink-500 text-white px-4 py-2 rounded-xl text-sm font-medium shadow-sm transition whitespace-nowrap";
+                } else {
+                    btn.className = "cat-btn bg-white hover:bg-pink-50 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium shadow-sm transition whitespace-nowrap";
+                }
+            });
             renderProducts();
         }
 
-        function handleSearch(isMobile = false) {
-            searchQuery = isMobile 
-                ? document.getElementById('mobileSearchInput').value 
-                : document.getElementById('searchInput').value;
-            renderProducts();
-        }
-
-        function resetFilters() {
-            searchQuery = '';
-            document.getElementById('searchInput').value = '';
-            document.getElementById('mobileSearchInput').value = '';
-            filterCategory('All');
-        }
-
-        // CART LOGIC
+        // Shopping Bag Logic
         function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            const existing = cart.find(item => item.id === productId);
-
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ ...product, quantity: 1 });
-            }
-
-            updateCartUI();
-            showToast(`Added "${product.name.substring(0, 18)}..." to bag!`);
-        }
-
-        function updateQuantity(productId, delta) {
-            const item = cart.find(i => i.id === productId);
+            const item = products.find(p => p.id === productId);
             if (!item) return;
 
-            item.quantity += delta;
-            if (item.quantity <= 0) {
-                cart = cart.filter(i => i.id !== productId);
+            const existing = cart.find(c => c.id === productId);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...item, qty: 1 });
             }
-            updateCartUI();
+
+            updateCartCount();
+            showToast(`Added ${item.title} to bag!`);
         }
 
-        function updateCartUI() {
-            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        function updateCartCount() {
+            const totalItems = cart.reduce((acc, curr) => acc + curr.qty, 0);
+            document.getElementById('cartCount').innerText = totalItems;
+            renderCartDrawer();
+        }
 
-            cartCountBadge.textContent = totalCount;
-            drawerCartBadge.textContent = `${totalCount} item${totalCount !== 1 ? 's' : ''}`;
-            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
-            cartTotal.textContent = `$${subtotal.toFixed(2)}`;
+        function renderCartDrawer() {
+            const container = document.getElementById('cartItemsContainer');
+            const totalEl = document.getElementById('cartTotalAmount');
+            const checkoutBtn = document.getElementById('checkoutButton');
 
             if (cart.length === 0) {
-                cartItemsList.innerHTML = `
-                    <div class="text-center py-12 text-slate-400">
-                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-pink-200"></i>
-                        <p class="text-sm font-medium">Your shopping bag is currently empty.</p>
-                        <button onclick="toggleCart(false)" class="mt-3 text-xs text-brand-600 font-bold hover:underline">Explore Products</button>
+                container.innerHTML = `
+                    <div class="text-center py-16 text-gray-400">
+                        <i class="fa-solid fa-bag-shopping text-5xl mb-3 text-pink-200"></i>
+                        <p class="text-sm">Your shopping bag is empty.</p>
                     </div>
                 `;
+                totalEl.innerText = '$0.00';
+                checkoutBtn.disabled = true;
                 return;
             }
 
-            cartItemsList.innerHTML = cart.map(item => `
-                <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-2xl border border-slate-100">
-                    <img src="${item.image}" alt="${item.name}" onerror="this.src='${generateSvgFallback(item.name, item.category)}'" class="w-14 h-14 object-cover rounded-xl border border-pink-100">
-                    <div class="flex-1 min-w-0">
-                        <h4 class="text-xs font-bold text-slate-800 truncate">${item.name}</h4>
-                        <p class="text-xs font-semibold text-brand-600 mt-0.5">$${item.price.toFixed(2)}</p>
-                        <div class="flex items-center gap-2 mt-1">
-                            <button onclick="updateQuantity(${item.id}, -1)" class="w-5 h-5 rounded bg-white border border-slate-200 text-slate-600 text-xs flex items-center justify-center hover:bg-slate-100">-</button>
-                            <span class="text-xs font-bold text-slate-700">${item.quantity}</span>
-                            <button onclick="updateQuantity(${item.id}, 1)" class="w-5 h-5 rounded bg-white border border-slate-200 text-slate-600 text-xs flex items-center justify-center hover:bg-slate-100">+</button>
+            checkoutBtn.disabled = false;
+            container.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+
+                const div = document.createElement('div');
+                div.className = 'flex items-center space-x-3 bg-pink-50/50 p-3 rounded-2xl border border-pink-100';
+                div.innerHTML = `
+                    <img src="${item.image}" class="w-16 h-16 object-cover rounded-xl bg-white border">
+                    <div class="flex-grow">
+                        <h4 class="font-bold text-xs text-gray-800 line-clamp-1">${item.title}</h4>
+                        <p class="text-xs text-pink-600 font-semibold">$${parseFloat(item.price).toFixed(2)}</p>
+                        
+                        <div class="flex items-center space-x-2 mt-2">
+                            <button onclick="changeQty('${item.id}', -1)" class="w-6 h-6 rounded-lg bg-white border text-xs font-bold hover:bg-gray-100 flex items-center justify-center">-</button>
+                            <span class="text-xs font-bold text-gray-700">${item.qty}</span>
+                            <button onclick="changeQty('${item.id}', 1)" class="w-6 h-6 rounded-lg bg-white border text-xs font-bold hover:bg-gray-100 flex items-center justify-center">+</button>
                         </div>
                     </div>
-                    <button onclick="updateQuantity(${item.id}, -${item.quantity})" class="text-slate-300 hover:text-rose-500 p-1 text-sm transition-colors">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                </div>
-            `).join('');
+                    <button onclick="removeFromCart('${item.id}')" class="text-gray-400 hover:text-red-500 p-1"><i class="fa-regular fa-trash-can"></i></button>
+                `;
+                container.appendChild(div);
+            });
+
+            totalEl.innerText = `$${total.toFixed(2)}`;
         }
 
-        function toggleCart(open) {
-            const drawer = document.getElementById('cartDrawer');
-            const overlay = document.getElementById('cartOverlay');
+        function changeQty(id, delta) {
+            const item = cart.find(c => c.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(c => c.id !== id);
+            }
+            updateCartCount();
+        }
 
-            if (open) {
-                overlay.classList.remove('hidden');
-                setTimeout(() => drawer.classList.remove('translate-x-full'), 10);
+        function removeFromCart(id) {
+            cart = cart.filter(c => c.id !== id);
+            updateCartCount();
+        }
+
+        function toggleCartDrawer() {
+            document.getElementById('cartDrawer').classList.toggle('hidden');
+        }
+
+        // Admin Access Handling
+        function handleAdminButtonClick() {
+            if (isAdminLoggedIn) {
+                openAdminDashboard();
             } else {
-                drawer.classList.add('translate-x-full');
-                setTimeout(() => overlay.classList.add('hidden'), 300);
+                openAdminLoginModal();
             }
         }
 
-        // CHECKOUT & ORDER SUBMISSION
-        function openCheckoutModal() {
-            if (cart.length === 0) {
-                showToast("Your cart is empty!");
+        function openAdminLoginModal() {
+            document.getElementById('adminPasswordInput').value = '';
+            document.getElementById('adminErrorMsg').classList.add('hidden');
+            document.getElementById('adminLoginModal').classList.remove('hidden');
+        }
+
+        function closeAdminLoginModal() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+
+        function submitAdminPassword(e) {
+            e.preventDefault();
+            const passInput = document.getElementById('adminPasswordInput').value;
+
+            if (passInput === adminPassword) {
+                isAdminLoggedIn = true;
+                closeAdminLoginModal();
+                document.getElementById('adminTopBar').classList.remove('hidden');
+                document.getElementById('adminBadge').classList.remove('hidden');
+                document.getElementById('adminBadge').classList.add('flex');
+                document.getElementById('adminBtnText').innerText = "Admin Dashboard";
+                showToast('Admin Mode Unlocked');
+            } else {
+                document.getElementById('adminErrorMsg').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            isEditModeActive = false;
+            document.getElementById('toggleEditMode').checked = false;
+            document.getElementById('adminTopBar').classList.add('hidden');
+            document.getElementById('adminBadge').classList.add('hidden');
+            document.getElementById('adminBadge').classList.remove('flex');
+            document.getElementById('addNewProductBtn').classList.add('hidden');
+            document.getElementById('adminBtnText').innerText = "Admin Access";
+            renderProducts();
+            showToast('Logged out from Admin Mode.');
+        }
+
+        function toggleEditingMode(checked) {
+            isEditModeActive = checked;
+            if (checked) {
+                document.getElementById('addNewProductBtn').classList.remove('hidden');
+            } else {
+                document.getElementById('addNewProductBtn').classList.add('hidden');
+            }
+            renderProducts();
+        }
+
+        // Admin Dashboard Tabs
+        function openAdminDashboard() {
+            switchAdminTab('orders');
+            document.getElementById('adminDashboardModal').classList.remove('hidden');
+        }
+
+        function closeAdminDashboard() {
+            document.getElementById('adminDashboardModal').classList.add('hidden');
+        }
+
+        function switchAdminTab(tab) {
+            const tabOrders = document.getElementById('adminTabOrders');
+            const tabSecurity = document.getElementById('adminTabSecurity');
+            const btnOrders = document.getElementById('tabBtnOrders');
+            const btnSecurity = document.getElementById('tabBtnSecurity');
+
+            if (tab === 'orders') {
+                tabOrders.classList.remove('hidden');
+                tabSecurity.classList.add('hidden');
+                btnOrders.className = "pb-2 text-pink-600 border-b-2 border-pink-500 flex items-center space-x-1";
+                btnSecurity.className = "pb-2 text-gray-500 hover:text-gray-700 flex items-center space-x-1";
+                renderOrdersList();
+            } else {
+                tabOrders.classList.add('hidden');
+                tabSecurity.classList.remove('hidden');
+                btnSecurity.className = "pb-2 text-pink-600 border-b-2 border-pink-500 flex items-center space-x-1";
+                btnOrders.className = "pb-2 text-gray-500 hover:text-gray-700 flex items-center space-x-1";
+            }
+        }
+
+        function handleUpdatePassword(e) {
+            e.preventDefault();
+            const curr = document.getElementById('currPassInput').value;
+            const newP = document.getElementById('newPassInput').value;
+            const conf = document.getElementById('confirmPassInput').value;
+
+            if (curr !== adminPassword) {
+                alert('Current password is incorrect.');
                 return;
             }
-            toggleCart(false);
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            document.getElementById('checkoutTotalAmount').textContent = `$${subtotal.toFixed(2)}`;
+
+            if (newP !== conf) {
+                alert('New passwords do not match.');
+                return;
+            }
+
+            adminPassword = newP;
+            localStorage.setItem('jean_stores_password', adminPassword);
+            alert('Admin password updated successfully!');
+            e.target.reset();
+        }
+
+        // Product Form (Add / Edit)
+        function openAddProductModal() {
+            document.getElementById('productModalTitle').innerText = 'Add New Product';
+            document.getElementById('editProductId').value = '';
+            document.getElementById('prodTitle').value = '';
+            document.getElementById('prodCategory').value = 'Sneakers';
+            document.getElementById('prodPrice').value = '';
+            document.getElementById('prodAge').value = 'Ages 12-15';
+            document.getElementById('prodImageUrl').value = '';
+            document.getElementById('prodDesc').value = '';
+            document.getElementById('imagePreviewContainer').classList.add('hidden');
+            currentUploadedBase64 = '';
+
+            document.getElementById('productFormModal').classList.remove('hidden');
+        }
+
+        function openEditProductModal(id) {
+            const p = products.find(item => item.id === id);
+            if (!p) return;
+
+            document.getElementById('productModalTitle').innerText = 'Edit Product Details';
+            document.getElementById('editProductId').value = p.id;
+            document.getElementById('prodTitle').value = p.title;
+            document.getElementById('prodCategory').value = p.category;
+            document.getElementById('prodPrice').value = p.price;
+            document.getElementById('prodAge').value = p.age || 'Ages 12-15';
+            document.getElementById('prodImageUrl').value = p.image.startsWith('data:') ? '' : p.image;
+            document.getElementById('prodDesc').value = p.description || '';
+
+            if (p.image) {
+                document.getElementById('imagePreview').src = p.image;
+                document.getElementById('imagePreviewContainer').classList.remove('hidden');
+                currentUploadedBase64 = p.image;
+            }
+
+            document.getElementById('productFormModal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productFormModal').classList.add('hidden');
+        }
+
+        function handleImageUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                currentUploadedBase64 = evt.target.result;
+                document.getElementById('imagePreview').src = currentUploadedBase64;
+                document.getElementById('imagePreviewContainer').classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveProduct(e) {
+            e.preventDefault();
+            const editId = document.getElementById('editProductId').value;
+            const title = document.getElementById('prodTitle').value;
+            const category = document.getElementById('prodCategory').value;
+            const price = parseFloat(document.getElementById('prodPrice').value);
+            const age = document.getElementById('prodAge').value;
+            const urlInput = document.getElementById('prodImageUrl').value;
+            const desc = document.getElementById('prodDesc').value;
+
+            let finalImage = currentUploadedBase64 || urlInput || 'https://placehold.co/600x600/fdf2f8/f472b6?text=Jean+Stores';
+
+            if (editId) {
+                const index = products.findIndex(p => p.id === editId);
+                if (index !== -1) {
+                    products[index] = { id: editId, title, category, price, age, image: finalImage, description: desc };
+                }
+            } else {
+                const newObj = {
+                    id: 'prod_' + Date.now(),
+                    title,
+                    category,
+                    price,
+                    age,
+                    image: finalImage,
+                    description: desc
+                };
+                products.unshift(newObj);
+            }
+
+            saveProductsToStorage();
+            closeProductModal();
+            showToast('Product successfully saved!');
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Are you sure you want to remove this item from Jean Stores?')) {
+                products = products.filter(p => p.id !== id);
+                saveProductsToStorage();
+                showToast('Item deleted.');
+            }
+        }
+
+        // Copy Helper
+        function copyText(text, btnElement) {
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+
+            const origHtml = btnElement.innerHTML;
+            btnElement.innerHTML = `<i class="fa-solid fa-check mr-1"></i> Copied!`;
+            btnElement.classList.add('bg-green-100', 'text-green-800');
+
+            setTimeout(() => {
+                btnElement.innerHTML = origHtml;
+                btnElement.classList.remove('bg-green-100', 'text-green-800');
+            }, 2000);
+        }
+
+        // Checkout & Orders Handling
+        function openCheckoutModal() {
+            toggleCartDrawer();
             document.getElementById('checkoutModal').classList.remove('hidden');
         }
 
@@ -843,58 +919,145 @@
             document.getElementById('checkoutModal').classList.add('hidden');
         }
 
-        function handleCheckoutSubmit(e) {
+        function submitCustomerOrder(e) {
             e.preventDefault();
 
-            if (!proofDataUrl) {
-                alert("Please upload a payment screenshot/receipt evidence before submitting your order!");
+            const name = document.getElementById('buyerName').value;
+            const email = document.getElementById('buyerEmail').value;
+            const phone = document.getElementById('buyerPhone').value;
+            const paymentMethod = document.getElementById('buyerPaymentMethod').value;
+            const address = document.getElementById('buyerAddress').value;
+            const proofFileInput = document.getElementById('proofFile');
+
+            if (proofFileInput.files.length === 0) {
+                alert('Please upload a screenshot of your payment proof.');
                 return;
             }
 
-            const name = document.getElementById('custName').value;
-            const email = document.getElementById('custEmail').value;
-            const whatsapp = document.getElementById('custWhatsapp').value;
-            const address = document.getElementById('custAddress').value;
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const file = proofFileInput.files[0];
+            const reader = new FileReader();
 
-            // Record Order in Admin Memory
-            ordersList.push({
-                date: new Date().toLocaleString(),
-                name,
-                email,
-                whatsapp,
-                address,
-                items: [...cart],
-                total: subtotal,
-                proof: proofDataUrl
-            });
+            reader.onload = function(evt) {
+                const proofBase64 = evt.target.result;
 
-            closeCheckoutModal();
-            cart = [];
-            proofDataUrl = null;
-            document.getElementById('proofPreviewText').classList.add('hidden');
-            document.getElementById('custProof').value = '';
-            updateCartUI();
+                const newOrder = {
+                    orderId: 'ORD-' + Math.floor(100000 + Math.random() * 900000),
+                    date: new Date().toLocaleString(),
+                    buyerName: name,
+                    buyerEmail: email,
+                    buyerPhone: phone,
+                    paymentMethod: paymentMethod,
+                    deliveryAddress: address,
+                    proofImage: proofBase64,
+                    items: [...cart],
+                    total: cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0)
+                };
 
-            showToast("🎉 Order & Payment Evidence Submitted! Thank you for shopping with Vakaa Stores.");
+                orders.unshift(newOrder);
+                localStorage.setItem('jean_stores_orders', JSON.stringify(orders));
+
+                cart = [];
+                updateCartCount();
+                closeCheckoutModal();
+                e.target.reset();
+
+                alert(`Thank you for shopping with Jean Stores! Your order (${newOrder.orderId}) has been placed. We will verify your payment and prepare your delivery.`);
+            };
+
+            reader.readAsDataURL(file);
         }
 
-        // TOAST ENGINE
-        function showToast(message) {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = 'toast-slide-in bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-2xl shadow-xl border border-slate-700 flex items-center gap-2 pointer-events-auto';
-            toast.innerHTML = `
-                <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
-                <span>${message}</span>
-            `;
+        // Admin Orders Display
+        function renderOrdersList() {
+            const container = document.getElementById('adminTabOrders');
+            container.innerHTML = '';
 
-            container.appendChild(toast);
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        <i class="fa-solid fa-receipt text-4xl mb-2 text-gray-300"></i>
+                        <p class="text-sm">No customer orders submitted yet.</p>
+                    </div>
+                `;
+                return;
+            }
 
+            orders.forEach(ord => {
+                const card = document.createElement('div');
+                card.className = 'bg-gray-50 border border-gray-200 rounded-2xl p-4 sm:p-5 space-y-3';
+
+                const itemsSummary = ord.items.map(i => `${i.qty}x ${i.title}`).join(', ');
+
+                card.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-gray-200 pb-3">
+                        <div>
+                            <span class="text-xs font-bold text-pink-600 bg-pink-100 px-2.5 py-0.5 rounded-md">${ord.orderId}</span>
+                            <span class="text-xs text-gray-400 ml-2">${ord.date}</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-gray-500 block">Total Amount Paid</span>
+                            <span class="text-lg font-bold text-gray-900">$${parseFloat(ord.total).toFixed(2)}</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div>
+                            <p class="text-gray-500 font-semibold">Customer Details:</p>
+                            <p class="font-bold text-gray-800 text-sm mt-0.5">${ord.buyerName}</p>
+                            <p class="text-gray-600"><i class="fa-brands fa-whatsapp text-green-500 mr-1"></i> ${ord.buyerPhone}</p>
+                            <p class="text-gray-600"><i class="fa-regular fa-envelope mr-1"></i> ${ord.buyerEmail}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 font-semibold">Delivery Address:</p>
+                            <p class="text-gray-800 mt-0.5 font-medium">${ord.deliveryAddress}</p>
+                            <p class="text-gray-500 font-semibold mt-2">Payment Method:</p>
+                            <span class="inline-block bg-purple-100 text-purple-800 font-bold text-[10px] px-2 py-0.5 rounded">${ord.paymentMethod}</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-3 rounded-xl border border-gray-100 text-xs">
+                        <p class="font-semibold text-gray-700">Ordered Items:</p>
+                        <p class="text-gray-600">${itemsSummary}</p>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <button onclick="viewProof('${ord.proofImage}')" class="bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1.5 rounded-lg transition flex items-center">
+                            <i class="fa-regular fa-image mr-1"></i> View Payment Proof Screenshot
+                        </button>
+                        <button onclick="clearOrder('${ord.orderId}')" class="text-red-500 hover:text-red-700 text-xs font-semibold">
+                            <i class="fa-solid fa-trash mr-1"></i> Remove Order
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function viewProof(base64Img) {
+            document.getElementById('proofModalImg').src = base64Img;
+            document.getElementById('proofModal').classList.remove('hidden');
+        }
+
+        function closeProofModal() {
+            document.getElementById('proofModal').classList.add('hidden');
+        }
+
+        function clearOrder(orderId) {
+            if (confirm('Delete this order entry?')) {
+                orders = orders.filter(o => o.orderId !== orderId);
+                localStorage.setItem('jean_stores_orders', JSON.stringify(orders));
+                renderOrdersList();
+                showToast('Order removed.');
+            }
+        }
+
+        // Toast Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transition = 'opacity 0.3s ease';
-                setTimeout(() => toast.remove(), 300);
+                toast.classList.add('translate-y-20', 'opacity-0');
             }, 3000);
         }
     </script>
