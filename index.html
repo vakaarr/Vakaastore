@@ -645,13 +645,35 @@
                 localStorage.setItem('jean_stores_password', adminPassword);
             }
 
-            // Products
+            // Products: keep visitor/admin product data, but always refresh the
+            // built-in product images from this deployed HTML file. This prevents
+            // old browser localStorage from hiding the 19 images embedded here.
             const storedProds = localStorage.getItem('jean_stores_products');
+            const canonicalById = new Map(INITIAL_PRODUCTS.map(p => [String(p.id), p]));
             if (storedProds) {
                 try {
-                    products = JSON.parse(storedProds);
+                    const savedProducts = JSON.parse(storedProds);
+                    if (Array.isArray(savedProducts)) {
+                        products = savedProducts.map(savedProduct => {
+                            const canonical = canonicalById.get(String(savedProduct.id));
+                            return canonical
+                                ? { ...savedProduct, image: canonical.image }
+                                : savedProduct;
+                        });
+                        // Ensure any built-in products added in this version exist,
+                        // while retaining other saved/admin-added products.
+                        const savedIds = new Set(products.map(p => String(p.id)));
+                        INITIAL_PRODUCTS.forEach(p => {
+                            if (!savedIds.has(String(p.id))) products.push(p);
+                        });
+                        localStorage.setItem('jean_stores_products', JSON.stringify(products));
+                    } else {
+                        products = INITIAL_PRODUCTS;
+                        localStorage.setItem('jean_stores_products', JSON.stringify(products));
+                    }
                 } catch(e) {
                     products = INITIAL_PRODUCTS;
+                    localStorage.setItem('jean_stores_products', JSON.stringify(products));
                 }
             } else {
                 products = INITIAL_PRODUCTS;
@@ -699,7 +721,7 @@
                 
                 card.innerHTML = `
                     <div class="relative aspect-square overflow-hidden bg-pink-50">
-                        <img src="${p.image}" alt="${p.title}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/600x600/fdf2f8/f472b6?text=Jean+Stores'">
+                        <img src="${p.image}" alt="${p.title}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27600%27 viewBox=%270 0 600 600%27%3E%3Crect width=%27600%27 height=%27600%27 fill=%27%23fdf2f8%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 fill=%27%23db2777%27 font-size=%2738%27%3EJean Stores%3C/text%3E%3C/svg%3E'">
                         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-pink-600 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
                             ${p.age || 'Ages 12-15'}
                         </span>
