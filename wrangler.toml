@@ -1,0 +1,14 @@
+name = "jean-stores"
+compatibility_date = "2026-10-23"
+pages_build_output_dir = "."
+
+# After creating a D1 database in Cloudflare, replace DATABASE_ID with its ID.
+[[d1_databases]]
+binding = "DB"
+database_name = "jean-stores-db"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+# Optional: create a private R2 bucket for uploaded payment evidence.
+# [[r2_buckets]]
+# binding = "PAYMENT_EVIDENCE"
+# bucket_name = "jean-stores-payment-evidence"

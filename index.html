@@ -417,6 +417,10 @@
 
     <!-- JavaScript Application Engine -->
     <script>
+        // Cloudflare Pages API base. Pages Functions are served from this same site.
+        // Keep this relative so preview and production deployments work without editing URLs.
+        const API_BASE = '/api';
+
         // Default Catalog Data
         const INITIAL_PRODUCTS = [
             {
